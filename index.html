@@ -3,7 +3,7 @@
     <meta charset="utf-8">
 
     <!-- this is the title that goes in the browser tab name  -->
-    <title>Interactive Data Visualization Tutorial</title>
+    <title>Working With Data</title>
 
     <!-- custom font: https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
@@ -14,17 +14,31 @@
       <h1>Working With Data</h1>
       <h2>Final Visualization</h2>
     </header>
+<div class="section" id="one">
+    
+    <label for="dropdown">Select a Neighborhood</label>
+    <select class='dropdown' id="dropdown" name="dropdown"></select>
+
+     <!--<label for="dropdown">Select a Neighborhood</label>
+    <select class='dropdown' id="dropdown2" name="dropdown2"></select>
 
     <label for="dropdown">Select a Neighborhood</label>
-    <select id="dropdown" name="dropdown"></select>
+    <select class='dropdown' id="dropdown3" name="dropdown3"></select>
+
+   <div class='checkbox'>
+            <input class='checkbox' id="checkbox" type="checkbox" name="myCheckBox" checked>
+            <label for="myCheckBox" id="checkbox" value="brooklyn">Brooklyn</label> <br>
+            <input class='checkbox' id="checkbox" type="checkbox" name="myCheckBox2" checked>
+            <label for="myCheckBox2" id="checkbox" value="manhattan">Manhattan</label>
+          </div -->
     <!-- all we need is an element to select -->
-    <div id="d3-container"> </div>
+    <div class= 'graph' id="d3-container"> </div>
+ </div>
+
 
     <!-- this is the line that loads in d3 -->
-    <script src="../Interactive-Data-Vis-SP2020/lib/d3.js"></script>
-    <!-- <script src="../lib/d3-array.js"></script>  -->
-    <script src = "https://d3js.org/d3-dsv.v1.min.js"></script>
-    <!-- this is the line that loads in the main js script -->
-    <script src="./main.js"></script>
+    <script src="/lib/d3.js"></script>
+       <!-- this is the line that loads in the main js script -->
+    <script src="main.js"></script>
   </body>
 </html>

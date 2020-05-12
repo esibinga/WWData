@@ -1,20 +1,50 @@
 body {
-    /* ref: https://fonts.google.com/specimen/Source+Sans+Pro?selection.family=Source+Sans+Pro */
-    font-family: "Source Sans Pro", sans-serif;
-    padding: 1em 3em;
+  /* ref: https://fonts.google.com/specimen/Source+Sans+Pro?selection.family=Source+Sans+Pro */
+  font-family: "Helvetica", sans-serif;
+  padding: 1em 3em;
+}
+
+.section#one {
+    display: grid;
+    text-align: right;
+    grid-column-gap: 10px;
+    grid-template-columns: 80% 20%;    /* divide the window into these horizontal percentages */
+  }
+  .section#one > .graph {
+    grid-column: 1 / 1;
+    cursor: crosshair;
+  }
+   .section#one > .dropdown {
+    text-align: right;
+    padding-top: 70%;
+    grid-column: 2 / 2;      /* start and end this column in position 1 of 1 */
+  }
+  .section#one > .checkbox {
+    text-align: left;
+    padding-top: 0%;
+    grid-column: 2 / 2;      /* start and end this column in position 1 of 1 */
+  }
+
+
+
+.dot {
+  cursor: pointer;
+}
+
+.dot:hover {
+  fill: orange;
+}
+
+text.label{
+    opacity: 0;
   }
   
-  .dot {
-    cursor: pointer;
+text.label:hover{
+    opacity: 1;
   }
-  
-  .dot:hover {
-    fill: orange;
-  }
-  
-  .axis-label {
-    font-size: 14px;
-    fill: black;
-    text-anchor: middle;
-  }
-  
+
+.axis-label {
+  font-size: 14px;
+  fill: black;
+  text-anchor: middle;
+}
