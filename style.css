@@ -1,6 +1,6 @@
 body {
   /* ref: https://fonts.google.com/specimen/Source+Sans+Pro?selection.family=Source+Sans+Pro */
-  font-family: "Helvetica", sans-serif;
+  font-family: "Monaco", sans-serif;
   padding: 1em 3em;
 }
 
@@ -12,11 +12,11 @@ body {
   }
   .section#one > .graph {
     grid-column: 1 / 1;
-    cursor: crosshair;
   }
    .section#one > .dropdown {
     text-align: right;
-    padding-top: 70%;
+    font-family: "Monaco";
+    padding-top: 10%;
     grid-column: 2 / 2;      /* start and end this column in position 1 of 1 */
   }
   .section#one > .checkbox {
@@ -45,6 +45,21 @@ text.label:hover{
 
 .axis-label {
   font-size: 14px;
+  font-family: 'Monaco';
   fill: black;
   text-anchor: middle;
 }
+
+.axis.y-axis {
+    font-size: 9px;
+    font-family: 'Monaco';
+    fill: none;
+    text-anchor: left;
+  }
+
+.axis.x-axis {
+    font-size: 9px;
+    font-family: 'Monaco';
+    fill: none;
+    text-anchor: middle;
+  }

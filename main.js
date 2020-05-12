@@ -58,25 +58,6 @@ function init() {
   // UI ELEMENT SETUP
   const selectElement = d3.select("#dropdown").on("change", function() {
     console.log("new selected entity is", this.value);
-    // `this` === the selectElement
-    // this.value holds the dropdown value a user just selected
-    state.selectedNeighborhood = this.value;
-    draw(); // re-draw the graph based on this new selection
-  });
-
-  const selectElement2 = d3.select("#dropdown2").on("change", function() {
-    console.log("new selected entity is", this.value);
-    // `this` === the selectElement
-    // this.value holds the dropdown value a user just selected
-    state.selectedNeighborhood = this.value;
-    draw(); // re-draw the graph based on this new selection
-  });
-
-
-  const selectElement3 = d3.select("#dropdown3").on("change", function() {
-    console.log("new selected entity is", this.value);
-    // `this` === the selectElement
-    // this.value holds the dropdown value a user just selected
     state.selectedNeighborhood = this.value;
     draw(); // re-draw the graph based on this new selection
   });
@@ -91,28 +72,6 @@ selectElement
     .join("option")
     .attr("value", d => d)
     .text(d => d);
-/*
-selectElement2
-    .selectAll("option")
-    .data([
-      ...Array.from(new Set(state.data.map(d => d.areaName))).sort(d => d.areaName),
-      default_selection,
-    ])
-    .join("option")
-    .attr("value", d => d)
-    .text(d => d);
-
-selectElement3
-    .selectAll("option")
-    .data([
-      ...Array.from(new Set(state.data.map(d => d.areaName))),
-      default_selection,
-    ])
-    .join("option")
-    .attr("value", d => d)
-    .text(d => d);
-*/
-    
 
   // this ensures that the selected value is the same as what we have in state when we initialize the options
   selectElement.property("value", default_selection);
@@ -145,24 +104,14 @@ selectElement3
     .append("text")
     .attr("class", "axis-label")
     .attr("y", "50%")
-    .attr("dx", "-3em")
+    .attr("dx", "-3.5em")
     .attr("writing-mode", "vertical-rl")
-    .text("Median Rent");
+    .text("Median Rent ($)");
 
-// // gridlines in x axis function
-// function make_x_gridlines() {		
-//     return d3.axisBottom(x)
-//         .ticks(5)
-// }
-
-// // add the X gridlines
-//  svg.append("g")			
-//       .attr("class", "grid")
-//       .attr("transform", "translate(0," + height + ")")
-//       .call(make_x_gridlines()
-//           .tickSize(-height)
-//           .tickFormat("")
-//       )
+// svg
+//     .append("g")
+//     .attr("class", "legend")
+//     .call(d3.legend);
 
   draw(); // calls the draw function
 }
@@ -172,56 +121,47 @@ selectElement3
  * we call this everytime there is an update to the data/state
  * */
 function draw() {
-  // filter the data for the selectedParty
+  // filter the data for the selectedNeighborhood
   let filteredData = state.data;
   if (state.selectedNeighborhood !== "All") {
     filteredData = state.data.filter(d => d.areaName === state.selectedNeighborhood);
   }
 
-  // update the scale domain (now that our data has changed)
-//   yScale
-//     .domain([0, d3.max(filteredData, d => d.medianRent)])
-//     .range([height - margin.bottom, margin.top]);
-
-  //re-draw our yAxix since our yScale is updated with the new data
-  /* d3.select("y-axis")
-    .transition()
-    .duration(1000)
-    .call(yAxis.scale(yScale)); // this updates the yAxis' scale to be our newly updated one
-*/
-  // we define our line function generator telling it how to access the x,y values for each point
+  // define line function generator telling it how to access the x,y values for each point
   const lineFunc = d3
     .line()
-    .x(d => xScale(d.year))
+    .defined(function (d) { return d.medianRent !== 0;}) //only draw lines where there are rent values
+    // -- this leaves gaps in the lines showing a lack of data, rather than having the line bounce up 
+    // and down off the x-axis
+    .x(d => xScale(d.date))
     .y(d => yScale(d.medianRent));
-    
+  
+  
 
   const dot = svg
     .selectAll(".dot")
     .data(filteredData, d => d.date) // use `d.date` as the `key` to match between HTML and data elements
-    //console.log("fd", filteredData)
     .join(
       enter =>
         // enter selections -- all data elements that don't have a `.dot` element attached to them yet
         enter
           .append("circle")
-          .attr("class", "dot") // Note: this is important so we can identify it in future updates
-          //.attr("stroke", "lightgrey")
-          .attr("fill", d=> {
-            if (d.borough === "Manhattan") return "#a6cee3";
-            else if (d.borough === "Bronx") return "#1f78b4";
-            else if (d.borough === "Brooklyn") return "#b2df8a";
-            else if (d.borough === "Queens") return "#33a02c";
-            else if (d.borough === "Staten Island") return "#fb9a99";
-            else return "black";
+          .attr("class", "dot")
+          .attr("fill", d=> { //fill colors based on borough
+            if (d.borough === "Manhattan") return "#a6cee3"; //light blue
+            else if (d.borough === "Bronx") return "#1f78b4"; //dark blue
+            else if (d.borough === "Brooklyn") return "#b2df8a"; //light green
+            else if (d.borough === "Queens") return "#fb9a99"; //salmon pink
+            else if (d.borough === "Staten Island") return "#33a02c"; //dark green
+            else return "lightgray";
           }) //make a function
           .attr("r", radius)
           .attr("opacity", d => {
               d3.select(this)
-              if (d.medianRent === 0) return "0.0";
-              else if (d.medianRent !== 0) return "0.8";
+              if (d.medianRent === 0) return "0.0"; //do not show dots where rent is listed as 0
+              else if (d.medianRent !== 0) return "0.5"; //decrease opacity to give a sense of density
           })
-          .attr("cy", d => yScale(d.medianRent)) // initial value - to be transitioned
+          .attr("cy", d => yScale(d.medianRent))
           .attr("cx", d => xScale(d.date))
           .call(enter =>
             enter
@@ -229,29 +169,29 @@ function draw() {
               .delay(d => 200 * d.date)
               .duration(500)
               .attr("opacity", 0.5)
-              //.attr("cx", d => xScale(d.pf_ss_women))
           ), 
       update => 
-        update
-        .call(update =>
-            update
-                .transition()
-                .duration(500)
-                .transition()
-                .duration(1000)
-                .attr("stroke", "lightgrey")
-        ),
+        update,
+        // .call(update =>
+        //     update
+        //         .transition()
+        //         .duration(500)
+        //         .transition()
+        //         .duration(1000)
+        //         .attr("stroke", "lightgrey")
+        // ),
       exit =>
-        exit.call(exit =>
-          // exit selections -- all the `.dot` element that no longer match to HTML elements
-          exit
-            .transition()
-            .delay(d => 200 * d.medianRent)
-            .duration(500)
-            //.attr("cy", height - margin.bottom)
-            .attr("opacity", "0")
-            .remove()
-        )
+      exit
+        // exit.call(exit =>
+        //   // exit selections -- all the `.dot` element that no longer match to HTML elements
+        //   exit
+        //     .transition()
+        //     .delay(d => 200 * d.medianRent)
+        //     .duration(500)
+        //     //.attr("cy", height - margin.bottom)
+        //     .attr("opacity", "0")
+        //     .remove()
+        // )
     )
     // the '.join()' function leaves us with the 'Enter' + 'Update' selections together.
     // Now we just need move them to the right place
@@ -259,18 +199,18 @@ function draw() {
     .call(
       selection =>
         selection
-          //.data([filteredData])
           .transition() // initialize transition
           .duration(1000) // duration 1000ms / 1s
+          .attr("radius", 10)
           .attr("cy", d => yScale(d.medianRent)) 
           .attr("opacity", d => {
             d3.select(this)
             if (d.medianRent === 0) return "0.0"
             else return "1.0";
-        }) // started from the bottom, now we're here
+        }) 
     );
 
-
+//add lines to the chart
   const line = svg
     .selectAll("path.trend")
     .data([filteredData])
@@ -279,6 +219,9 @@ function draw() {
         enter
           .append("path")
           .attr("class", "trend")
+          .attr("fill", "none")
+          .attr("stroke", "black")
+          .attr("stroke-width", 2)
           .attr("opacity", 0.0), // start them off as opacity 0 and fade them in
       update => update, // pass through the update selection
       exit => exit.remove()
@@ -286,44 +229,15 @@ function draw() {
     .call(selection =>
       selection
         .transition() // sets the transition on the 'Enter' + 'Update' selections together.
-        .duration(1000)
-        .attr("opacity", 1)
+        .duration(500)
+        .attr("opacity", "1.0")
+        .attr("fill", "none")
+        .attr("stroke", "black")
+        .attr("stroke-width", function(d) {
+            if (state.selectedNeighborhood === "All") return "0.0"; //I'm figuring out how to make this look readable -- not satisfied with it yet
+            else return "1.5"; //thick enough line that you can read it easily on top of dots
+        })
         .attr("d", d => lineFunc(d))
     );
-
-    svg.append("g")			
-    .attr("class", "grid")
-    .attr("transform", "translate(0," + height + ")")
-    .call(make_x_gridlines()
-        .tickSize(-height)
-        .tickFormat("")
-    )
-
-     
-// function update(){
-
-    // // For each check box:
-    // d3.selectAll("#checkbox").each(function(d){
-    //     cb = d3.select(this);
-    //     console.log("cb this", this)
-    //     grp = cb.property("value")
-
-    //     // If the box is check, I show the group
-    //     if(cb.property("checked")){
-    //     svg.selectAll("."+grp).transition().duration(1000).style("opacity", 1).attr("r", function(d){ return size(d.borough) })
-
-    //     // Otherwise I hide it
-    //     }else{
-    //     svg.selectAll("."+grp).transition().duration(1000).style("opacity", 0).attr("r", 0)
-    //     }
-    // })
-    // }
-
-    // // When a button change, I run the update function
-    // d3.selectAll(".checkbox").on("change",update);
-
-    // // And I initialize it at the beginning
-    // update()
-
 
 }
