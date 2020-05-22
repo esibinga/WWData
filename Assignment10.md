@@ -1,4 +1,7 @@
-Key design details for the visualization are:<br><br>
+<a href="https://github.com/esibinga/WWDdata/blob/master/main.js">Code</a>
+<br><br>
+
+<b>Key design details for the visualization are:<b><br><br>
 Each dot represents one month's median rent cost of one area (either a neighborhood, borough, or group of neighborhoods, all listed in the dropdown) <br>
 The dots are colored by borough to give a quick sense that median rent is generally moving upwards and striated by borough, although there is a bit of overlap<br>
 This still needs a legend, which I haven’t quite figured out yet<br>
@@ -8,6 +11,6 @@ Some things that I did intentionally: changing the font consistently to create a
 
 I like this as a way to see individual dots/variation and also compare trends. The data is overwhelming and basically unreadable with no color distinction, but coloring by borough is a great familiar sub-category that gets more granular while still allowing for discovery of the particulars of neighborhood-level data. Also, having dots AND a line, rather than all lines or all dots, allows for better visual comparison. One UI component that would improve the visualization is to have the trend line and neighborhood line show up when a user hovers. This would allow for comparison of different neighborhoods against the dropdown option, and also answer obvious user questions like “which neighborhood does XYZ dot belong to?”<br><br>
 
-The most important text to reiterate (which I could begin to address with a chart title) is that this is StreetEasy data, not actual rental data. That’s most obvious when you realize that 1. only one Staten Island neighborhood appears on the map (it’s dark green, and barely visible) and 2. The Bronx seems to only become a real place in 2013. It’s also interesting to see neighborhoods like Tremont (below) which appear on the visualization in the middle of the time scale.
+The most important text to reiterate (which I could begin to address with a chart title) is that <b>this is StreetEasy data, not actual rental data.<b> That’s most obvious when you realize that 1. only one Staten Island neighborhood appears on the map (it’s dark green, and barely visible) and 2. The Bronx seems to only become a real place in 2013. It’s also interesting to see neighborhoods like Tremont (below) which appear on the visualization in the middle of the time scale.
 <br><br>
 The Tremont detail tells a more interesting story about StreetEasy’s expansion, and what that might represent, than about comprehensive median rent data for NYC. That’s something I want to get at in the narrative, but could also bring into the image in a few ways. Descriptive title and source data linked back to StreetEasy are the most straightforward, but another simple visualization, like a stacked bar chart, that shows what percentage of the neighborhoods in each borough are actually listed on SE would also help to represent what is left out of the median rent visualization. 
