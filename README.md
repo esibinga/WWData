@@ -18,6 +18,6 @@ some qualitative analysis of StreetEasy's marketing campaigns, though, "gentrfie
 <br><br>
 C. The report will be delivered as a combination of text and charts, and will include an interactive dashboard, allowing users to explore and compare firsthand how monthly median rents have changed in neighborhoods througout the city. 
 <br><br><br><br>
-The final report and dashboard can be found <a href= 'https://esibinga.github.io/WWDdata'>here</a>.
+The final report and dashboard can be found <a href= 'https://esibinga.github.io/WWData/'>here</a>.
 
 
