@@ -18,23 +18,44 @@
     
     <label for="dropdown">Select a Neighborhood</label>
     <select class='dropdown' id="dropdown" name="dropdown"></select>
+    <div class='dropdown' id="boroughs" name="boroughs"> <br>
+      <p class='mn'>Manhattan</p>
+      <p class='bk'>Brooklyn</p>
+      <p class='qs'>Queens</p> 
+      <p class='si'>Staten Island</p>
+      <p class='bx'>Bronx</p> 
+    </div>
 
     <!-- all we need is an element to select -->
     <div class= 'graph' id="d3-container"> </div>
  </div>
 <div class="section" id="two" name="responses">
-  <p>
-    (A) Intro</p>
-     <p>
-    (B) Brief description of the data</p>
-    Data were downloaded as a .csv file from the StreetEasy data dashboard in April 2020, and reshaped 
-    using Python so that median rent could be visualized over time.
-     <p>
-    (C) Visualization & Narrative (^)</p>
-     <p>
-    (D & E) Summary of the insights gained from the data & connections to existing knowledge</p> <p>
+<br><br>
+
+    <p class="text">
+    This project was inspired by my own experience of the malleability (and not) of New York City 
+    rents. I was pleasantly surprised to find in 2018 that writing a persuasive email to my landlord 
+    about the impacts of the proposed L train shutdown was enough to get my rent lowered. Even after 
+    the subway closure was scaled back, my rent remained dropped for another year's lease (I'm not sure if that 
+    was a clerical error or a sign of the market, though). This led me both to wonder about the lasting impacts 
+    of subway infrastructure on the neighborhood, and to worry the day that I <i>would</i> be priced out of my apartment. 
+    Oh the irony of that fear, as a young, college-educated white person living in Bushwick... <br>
+    The upshot is a tool that allows for exploration of NYC neighborhood median rent data over the last ten years, 
+    with a particular visual focus on comparing neighborhood trends shown in each neighborhood's line graph  to the 
+    broader picture of all the data, shown as a scatterplot.
+  </p>
+  <h4 class="headers">(A) Introduction</h4>  
+
+    <p class="text" id="offset">
+    Data were downloaded as a .csv file from the <a href='https://streeteasy.com/blog/data-dashboard/?agg=Total&metric=Inventory&type=Rentals&bedrooms=Any%20Bedrooms&property=Any%20Property%20Type&minDate=2010-01-01&maxDate=2020-03-01&area=Flatiron,Brooklyn%20Heights'>
+    StreetEasy data dashboard</a> in April 2020, and <a href="https://github.com/esibinga/WWDdata/blob/master/StreetEasy_median_rent_data_cleaning.ipynb">
+    reshaped using Python</a> so that median rent could be visualized over time.
+  </p>
+  <h4 class="headers">(B) Data </h4>
+
+    <p class="text">
       Unsurprisingly, there's a general trend of median rents increasing in New 
-      York. Beyond that, here are 3 interesting finds that emerge from the this visualization: <br><br>
+      York. Beyond that, here are 3 interesting finds that emerge from this visualization: <br><br>
       1. Some neighborhoods have developed a noticeable seasonal change in rent, reflecting a broader 
       trend in NYC. Select "NYC" in the dropdown to see that the line becomes "wavier" 
       starting around 2016, with a peak each summer and valley each winter. Bushwick, 
@@ -69,9 +90,10 @@
       existing consumers. Are people who already lived in the Bronx are now using StreetEasy to look for 
       apartments in the Bronx, or are StreetEasy users who didn't used to look at apartments in the Bronx 
       now looking there?
-      
-
     </p>
+    <h4 class="headers">(D & E) Insights & connections to existing knowledge</h4>
+    <p class="text" id="offset">Number 1</p>
+    <h4 class="headers">Assignment links</h4>
 </div>
 
     <!-- this is the line that loads in d3 -->

@@ -5,7 +5,7 @@ const width = window.innerWidth * 0.7,
   height = window.innerHeight * 0.7,
   margin = { top: 20, bottom: 50, left: 60, right: 40 },
   radius = 2,
-  default_selection = "None Selected";
+  default_selection = "All";
 
 /** these variables allow us to access anything we manipulate in init() but need access to in draw().
  * All these variables are empty before we assign something to them.*/
@@ -17,7 +17,7 @@ let yScale;
 /* APPLICATION STATE */
 let state = {
   data: [],
-  selectedNeighborhood: "None Selected",
+  selectedNeighborhood: "All",
 };
 
 /**
@@ -172,29 +172,10 @@ function draw() {
           ), 
       update => 
         update,
-        // .call(update =>
-        //     update
-        //         .transition()
-        //         .duration(500)
-        //         .transition()
-        //         .duration(1000)
-        //         .attr("stroke", "lightgrey")
-        // ),
       exit =>
-      exit
-        // exit.call(exit =>
-        //   // exit selections -- all the `.dot` element that no longer match to HTML elements
-        //   exit
-        //     .transition()
-        //     .delay(d => 200 * d.medianRent)
-        //     .duration(500)
-        //     //.attr("cy", height - margin.bottom)
-        //     .attr("opacity", "0")
-        //     .remove()
-        // )
+      exit //no update or enter specified for the dots means they stay on the viz to provide context for each line (drawn below)
     )
-    // the '.join()' function leaves us with the 'Enter' + 'Update' selections together.
-    // Now we just need move them to the right place
+
 
     .call(
       selection =>
@@ -211,14 +192,15 @@ function draw() {
     );
 
   svg.selectAll("text.label")
-    .data(filteredData, d => d.areaName)
+    .data(filteredData, d => d.areaName) //join the data using the unique key of areaName
     .join("text")
     .attr("class","label")
     .attr("x", d => xScale(d.date))
     .attr("y", d => yScale(d.medianRent))
     .attr("fill", "black")
     .attr("font-size", "10px")
-    .text(d => d.medianRent)  
+    .text(d => d.medianRent) //label each dot with the median rent value for that month / area (only 
+                              //shows for the selected neighborhood since the data source is the filteredData)
 
 //add lines to the chart
   const line = svg
@@ -232,9 +214,9 @@ function draw() {
           .attr("fill", "none")
           .attr("stroke", "black")
           .attr("stroke-width", 2)
-          .attr("opacity", 0.0), // start them off as opacity 0 and fade them in
+          .attr("opacity", 0.0), // start lines off as opacity 0 and fade them in
       update => update, // pass through the update selection
-      exit => exit.remove()
+      exit => exit.remove() //remove line when the next selection is made
     )
     .call(selection =>
       selection
@@ -244,7 +226,7 @@ function draw() {
         .attr("fill", "none")
         .attr("stroke", "black")
         .attr("stroke-width", function(d) {
-            if (state.selectedNeighborhood === "All") return "0.0"; //I'm figuring out how to make this look readable -- not satisfied with it yet
+            if (state.selectedNeighborhood === "All") return "0.0"; //do not display lines when all dots are selected (too messy, doesn't look good)
             else return "1.5"; //thick enough line that you can read it easily on top of dots
         })
         .attr("d", d => lineFunc(d))

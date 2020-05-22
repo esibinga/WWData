@@ -12,13 +12,37 @@ body {
   }
   .section#one > .graph {
     grid-column: 1 / 1;
+    grid-row: 2 / 2;
   }
    .section#one > .dropdown {
-    text-align: right;
+    text-align: left;
     font-family: "Monaco";
-    padding-top: 10%;
+    padding-top: 70%;
     grid-column: 2 / 2;      /* start and end this column in position 1 of 1 */
   }
+  .section#one > .boroughs {
+    text-align: right;
+    font-family: "Monaco";
+    grid-column: 2 / 2;  
+    grid-row: 2 / 2;    /* start and end this column in position 1 of 1 */
+  }
+
+  .bk {
+  color: #b2df8a
+  }
+  .bx {
+    color: #1f78b4
+    }
+  .mn {
+    color: #a6cee3
+    }
+  .qs {
+    color: #fb9a99
+    }
+  .si {
+    color: #33a02c
+    }
+
   .section#one > .checkbox {
     text-align: left;
     padding-top: 0%;
@@ -27,14 +51,33 @@ body {
 
 .section#two > p {
   font-size: 12px;
-  margin-left: 7%;
-  margin-right: 20%;
+  margin-left: 8%;
+  margin-right: 2%;
   margin-top: 2%;
   margin-bottom: 2%;
 
 }
+.section#two {
+  display: grid;
+  text-align: left;
+  grid-column-gap: 20px;
+  grid-template-columns: 80% 20%;    /* divide the window into these horizontal percentages */
+}
 
+.headers{
+  text-align: left;
+  font-size: 14px;
+  grid-column: 2 / 2;
+}
 
+.text {
+  grid-column: 1 / 1;
+}
+#offset {
+  background: #eeeeee;
+  padding: 1%;
+  margin-right: 10%;
+}
 .dot {
   cursor: pointer;
 }
