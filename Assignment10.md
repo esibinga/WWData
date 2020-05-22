@@ -1,5 +1,7 @@
-<a href="https://github.com/esibinga/WWDdata/blob/master/main.js">Code</a>
-<br><br>
+Assignment 10: reflect on a visualization from the final Project<br>
+
+Visualization code can be found <a href="https://github.com/esibinga/WWDdata/blob/master/main.js">here</a>.
+<br>
 
 <b>Key design details for the visualization are:</b>
 <br><br>
