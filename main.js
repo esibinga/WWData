@@ -210,6 +210,16 @@ function draw() {
         }) 
     );
 
+  svg.selectAll("text.label")
+    .data(filteredData, d => d.areaName)
+    .join("text")
+    .attr("class","label")
+    .attr("x", d => xScale(d.date))
+    .attr("y", d => yScale(d.medianRent))
+    .attr("fill", "black")
+    .attr("font-size", "10px")
+    .text(d => d.medianRent)  
+
 //add lines to the chart
   const line = svg
     .selectAll("path.trend")

@@ -12,29 +12,65 @@
   <body>
     <header>
       <h1>Working With Data</h1>
-      <h2>Final Visualization</h2>
+      <h4>Click here for <a href=https://github.com/esibinga/WWData/blob/master/README.md>proposal</a> and <a href=https://github.com/esibinga/WWData/blob/master/main.js>code</a>.</h4>
     </header>
 <div class="section" id="one">
     
     <label for="dropdown">Select a Neighborhood</label>
     <select class='dropdown' id="dropdown" name="dropdown"></select>
 
-     <!--<label for="dropdown">Select a Neighborhood</label>
-    <select class='dropdown' id="dropdown2" name="dropdown2"></select>
-
-    <label for="dropdown">Select a Neighborhood</label>
-    <select class='dropdown' id="dropdown3" name="dropdown3"></select>
-
-   <div class='checkbox'>
-            <input class='checkbox' id="checkbox" type="checkbox" name="myCheckBox" checked>
-            <label for="myCheckBox" id="checkbox" value="brooklyn">Brooklyn</label> <br>
-            <input class='checkbox' id="checkbox" type="checkbox" name="myCheckBox2" checked>
-            <label for="myCheckBox2" id="checkbox" value="manhattan">Manhattan</label>
-          </div -->
     <!-- all we need is an element to select -->
     <div class= 'graph' id="d3-container"> </div>
  </div>
+<div class="section" id="two" name="responses">
+  <p>
+    (A) Intro</p>
+     <p>
+    (B) Brief description of the data</p>
+     <p>
+    (C) Visualization & Narrative (^)</p>
+     <p>
+    (D & E) Summary of the insights gained from the data & connections to existing knowledge</p> <p>
+      Unsurprisingly, there's a general trend of median rents increasing in New 
+      York. Beyond that, here are 3 interesting finds that emerge from the this visualization: <br><br>
+      1. Some neighborhoods have developed a noticeable seasonal change in rent, reflecting a broader 
+      trend in NYC. Select "NYC" in the dropdown to see that the line becomes "wavier" 
+      starting around 2016, with a peak each summer and valley each winter. Bushwick, 
+      Crown Heights, the East Village, Gowanus, Greenpoint, Long Island City, Prospect 
+      Park, and Ridgewood rents all show this trend pretty strongly. At least 5 of those 
+      neighborhoods are also undeniably experiencing gentrification, and I hypothesize that 
+      one factor of "wavy" rent lines is that these areas tend to have more young (potentially 
+      first-time or inexperienced renters) who create demand in the summer when they, for example, 
+      graduate college and move to the city, and may then be upsold in the summer given the higher demand and less experience. 
+      StreetEasy definitely targeted millenials / twenty-something young professionals as its 
+      demographic of choice in its recent mass marketing campaign across New York, and I would be curious 
+      to see in which neighborhoods the company experiences its greatest growth in terms of number of properties leased. 
+      <br><br>
+      I'd suspect that one-year, unrenewed leases are more standard among this young demographic, and therefore 
+      become more common in the neighborhoods that they move to. On the flip side, the Upper East and West sides 
+      of Manhattan, very stable residential markets that are not experiencing gentrification, show almost 
+      no seasonal variation.
+      <br><br>
+      Interestingly, SoHo has an extremely strong reverse trend (on the order of a $2,000 dollar per month 
+      more expensive in January than in June), and is pretty much the only neighborhood to show
+      that pattern. Maybe it's all the rich people fleeing to their summer homes...
+      <br><br>
+      2. North Brooklyn median rent increases by over $500 during 2019, despite 
+      the L-train construction significantly impacting subway travel in that area of the city 
+      during that time. One answer is that the proposed shut down had been much worse, so the January 
+      of 2019 announcement of only a partial shutdown made neighborhoods all along L viable options 
+      once more, leading to a sharper than usual increase in demand and a price hike. 
+      <br><br>
+      3. Finally, it's interesting to observe which neighborhoods "arrive" on the visualization: 
+      Fordham, Morris Park, Mott Haven, Tremont, and several other Bronx neighborhoods. It's hard to say whether 
+      Streeteasy's increasing reach is due to an expanding consumer base or to the expanding geographic range of 
+      existing consumers. Are people who already lived in the Bronx are now using StreetEasy to look for 
+      apartments in the Bronx, or are StreetEasy users who didn't used to look at apartments in the Bronx 
+      now looking there?
+      
 
+    </p>
+</div>
 
     <!-- this is the line that loads in d3 -->
     <script src="/lib/d3.js"></script>
